@@ -1,15 +1,15 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PokeDexBack.Application;
+using PokeDexBack.Infrastructure;
 
 namespace PokeDexBack.ConsoleApp
 {
     public class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-
-            var serviceProvider = new ServiceCollection()
-                .BuildServiceProvider();
 
             var builder = new ConfigurationBuilder();
             builder.SetBasePath(Directory.GetCurrentDirectory())
@@ -17,7 +17,14 @@ namespace PokeDexBack.ConsoleApp
 
             IConfiguration config = builder.Build();
 
-            var conn = config.GetSection("ApiSettings").GetSection("UrlString").Value;
+            var serviceCollection = new ServiceCollection()
+                .AddApplicationServices()
+                .AddInfrastructureServices(config)
+                .BuildServiceProvider();
+
+            var mediaTr = new MoveTest(serviceCollection.GetService<IMediator>());
+            await mediaTr.GetMoves(3,0,"move");
+
         }
     }
 }

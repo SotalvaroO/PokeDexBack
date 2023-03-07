@@ -1,12 +1,11 @@
 ﻿
 using System.Linq.Expressions;
 
-namespace PokeDexBack.Application.Contracts
+namespace PokeDexBack.Infrastructure.Contracts
 {
-    public interface IAsyncRepository<T> where T : class
+    public interface IApiClient<T>
     {
         Task<T> GetAsync(
-                                        Expression<Func<T, bool>> predicate = null,
                                         int offset = 0,
                                         int pageSize = 20,
                                         string endpoint = ""
