@@ -24,6 +24,11 @@ namespace PokeDexBack.ConsoleApp
 
             var mediaTr = new MoveTest(serviceCollection.GetService<IMediator>());
             await mediaTr.GetMoves(3,0,"move");
+            var moveList = await mediaTr.ConsultMovement(0, 20, "move");
+            foreach(var move in moveList)
+            {
+                Console.WriteLine(move.Name);
+            }
 
         }
     }

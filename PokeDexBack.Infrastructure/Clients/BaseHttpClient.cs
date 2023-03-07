@@ -21,7 +21,7 @@ namespace PokeDexBack.Infrastructure.Clients
         {
             _httpClientFactory = httpClientFactory;
             _httpClient = _httpClientFactory.CreateClient();
-            _url = new ApiSettings() { UrlString = "https://pokeapi.co/api/v2/" };
+            _url = new ApiSettings() { UrlString = "https://pokeapi.co/api/v2/" };  //TODO: revisar que sucedió con la inyección de dependencias, porque no está trayendo el valor del string
         }
 
         public async Task<T> GetAsync(int offset = 0, int pageSize = 20, string endpoint = "")
